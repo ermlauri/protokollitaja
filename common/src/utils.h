@@ -12,6 +12,12 @@ class Utils : public QObject
 {
     Q_OBJECT
 public:
+    struct BroadcastTarget {
+        QString localIp;
+        QHostAddress broadcastAddress;
+    };
+
+    static QList<BroadcastTarget> getBroadcastTargets();
     static QStringList getLocalIps();
     static void sendInbandBroadcast(QString target);
 };

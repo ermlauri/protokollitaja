@@ -1,19 +1,35 @@
 #include "utils.h"
 
-QStringList Utils::getLocalIps()
+QList<Utils::BroadcastTarget> Utils::getBroadcastTargets()
 {
-    QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
-    QList<QHostAddress> addresses;
-    QStringList cleanedAddresses;
+    QList<BroadcastTarget> targets;
 
-    foreach(QNetworkInterface interface, interfaces) {
-        if (interface.type() == QNetworkInterface::Ethernet || interface.type() == QNetworkInterface::Wifi)
-            addresses.append(interface.allAddresses());
+    foreach(QNetworkInterface interface, QNetworkInterface::allInterfaces()) {
+        if (interface.type() != QNetworkInterface::Ethernet && interface.type() != QNetworkInterface::Wifi)
+            continue;
+
+        if (!interface.flags().testFlag(QNetworkInterface::IsUp) || !interface.flags().testFlag(QNetworkInterface::IsRunning))
+            continue;
+
+        foreach(QNetworkAddressEntry entry, interface.addressEntries()) {
+            if (!entry.ip().isGlobal() || entry.ip().protocol() != QAbstractSocket::IPv4Protocol)
+                continue;
+
+            // Point-to-point and some virtual interfaces have no broadcast address, fall back to the limited broadcast
+            QHostAddress broadcastAddress = entry.broadcast().isNull() ? QHostAddress(QHostAddress::Broadcast) : entry.broadcast();
+            targets.append({entry.ip().toString(), broadcastAddress});
+        }
     }
 
-    foreach(QHostAddress addr, addresses) {
-        if (addr.isGlobal() && addr.protocol() == QAbstractSocket::IPv4Protocol)
-            cleanedAddresses.append(addr.toString());
+    return targets;
+}
+
+QStringList Utils::getLocalIps()
+{
+    QStringList cleanedAddresses;
+
+    foreach(BroadcastTarget target, Utils::getBroadcastTargets()) {
+        cleanedAddresses.append(target.localIp);
     }
 
     cleanedAddresses.removeDuplicates();
@@ -22,10 +38,14 @@ QStringList Utils::getLocalIps()
 
 void Utils::sendInbandBroadcast(QString target)
 {
-    QStringList addresses = Utils::getLocalIps();
-    QByteArray datagram = "InBand uu?;" + addresses.first().toLocal8Bit() + ";" + target.toLocal8Bit();
     QUdpSocket udpSocket;
-    udpSocket.writeDatagram(datagram.data(), datagram.size(), QHostAddress::Broadcast, 45744);
-    udpSocket.waitForBytesWritten();
+
+    foreach(BroadcastTarget broadcastTarget, Utils::getBroadcastTargets()) {
+        // Each network gets its own local IP in the datagram, so the target answers to the reachable address
+        QByteArray datagram = "InBand uu?;" + broadcastTarget.localIp.toLocal8Bit() + ";" + target.toLocal8Bit();
+        udpSocket.writeDatagram(datagram.data(), datagram.size(), broadcastTarget.broadcastAddress, 45744);
+        udpSocket.waitForBytesWritten();
+    }
+
     udpSocket.disconnectFromHost();
 }
