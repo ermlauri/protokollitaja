@@ -19,6 +19,8 @@ private slots:
     void sanityCheckWithPoints();
     void sanityCheckWithShots();
     void test_xlsExportDataAssembly();
+    void test_xlsRowsForSoloCompetitorTeam();
+    void test_xlsRowsForMultiCompetitorTeam();
     void test_readProtokollitajaGeneratedFile();
     void test_readSiusShotWithOffsetWithPoints();
     void test_readSiusShotWithOffsetWithShots();
@@ -435,6 +437,50 @@ void ProtofinaalTest::test_xlsExportDataAssembly()
     if (!foundMultiTeam) {
         QSKIP("No multi-competitor team found in test data to verify block assembly.");
     }
+}
+
+void ProtofinaalTest::test_xlsRowsForSoloCompetitorTeam()
+{
+    XlsTeamBlock block;
+    block.teamTotalRow.rank = "1.";
+    block.teamTotalRow.name = "Solo Competitor";
+    block.teamTotalRow.total = "100.0";
+
+    XlsShotRow soloRow;
+    soloRow.name = "Solo Competitor";
+    soloRow.total = "100.0";
+    block.competitorRows.append(soloRow);
+
+    QVector<XlsShotRow> rows = collectXlsRowsForBlock(block);
+
+    QCOMPARE(rows.size(), 1);
+    QCOMPARE(rows.first().rank, "1.");
+    QCOMPARE(rows.first().name, "Solo Competitor");
+}
+
+void ProtofinaalTest::test_xlsRowsForMultiCompetitorTeam()
+{
+    XlsTeamBlock block;
+    block.teamTotalRow.rank = "1.";
+    block.teamTotalRow.name = "TeamA/TeamB";
+    block.teamTotalRow.total = "200.0";
+
+    XlsShotRow firstRow;
+    firstRow.name = "TeamA";
+    firstRow.total = "100.0";
+    block.competitorRows.append(firstRow);
+
+    XlsShotRow secondRow;
+    secondRow.name = "TeamB";
+    secondRow.total = "100.0";
+    block.competitorRows.append(secondRow);
+
+    QVector<XlsShotRow> rows = collectXlsRowsForBlock(block);
+
+    QCOMPARE(rows.size(), 3);
+    QCOMPARE(rows.at(0).name, "TeamA/TeamB");
+    QCOMPARE(rows.at(1).name, "TeamA");
+    QCOMPARE(rows.at(2).name, "TeamB");
 }
 
 QTEST_MAIN(ProtofinaalTest)

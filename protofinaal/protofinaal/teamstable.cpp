@@ -323,35 +323,22 @@ QJsonObject TeamsTable::toJson() const
 QVector<XlsTeamBlock> TeamsTable::toXlsData(int maxShots) const
 {
     QVector<XlsTeamBlock> blocks;
-    
-    auto sortedResults = getSortedResults();
-    QList<int> keys = sortedResults.keys();
-    std::sort(keys.begin(), keys.end(), std::greater<int>());
+
+    // Teams are matched by identity, as team names are not guaranteed to be unique or even set
+    QVector<Team*> sortedTeams = m_teams;
+    std::stable_sort(sortedTeams.begin(), sortedTeams.end(), [](const Team *first, const Team *second) {
+        return first->team10Total() > second->team10Total();
+    });
 
     const int lastShotIdx = lastValidShotIndex();
     int rank = 1;
-    
-    foreach (int key, keys) {
-        QList<Result> results = sortedResults.values(key);
-        foreach (Result result, results) {
-            Team *team = nullptr;
-            foreach (Team *t, m_teams) {
-                if (t->teamName() == result.name) {
-                    team = t;
-                    break;
-                }
-            }
 
-            if (!team) {
-                continue;
-            }
-
-            QString rankStr = QString::number(rank).append(".");
-            blocks.append(team->toXlsData(maxShots, lastShotIdx, rankStr));
-            rank++;
-        }
+    foreach (Team *team, sortedTeams) {
+        QString rankStr = QString::number(rank).append(".");
+        blocks.append(team->toXlsData(maxShots, lastShotIdx, rankStr));
+        rank++;
     }
-    
+
     return blocks;
 }
 

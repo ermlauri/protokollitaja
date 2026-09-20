@@ -20,6 +20,8 @@ private slots:
     void test_readSiusShotWithOffset();
     void test_returnSortedResults();
     void test_returnSortedResultsForTeams();
+    void test_xlsDataForTeamsWithoutUniqueTeamNames();
+    void test_xlsDataForTeamsWithEqualResults();
 
 };
 
@@ -383,6 +385,82 @@ void TeamsTableTest::test_returnSortedResultsForTeams()
     QCOMPARE(actual4.last().shotValue, expected4.shotValue);
     QCOMPARE(actual4.last().seriesOrPoints, expected4.seriesOrPoints);
     QCOMPARE(actual4.last().totalScore, expected4.totalScore);
+}
+
+namespace {
+
+TeamsTable* createTeamsTableWithShots(int membersInTeam, bool equalResults)
+{
+    QJsonObject json = QJsonDocument::fromJson(QString("{\"event\": \"60l Õhupüss\",\"teams\": 3,\"membersInTeam\": %1,\"relaysTogether\": 1,\"shots\": [4],\"scoringWithPoints\": false}").arg(membersInTeam).toUtf8()).object();
+
+    TeamsTable *teamsTable = new TeamsTable;
+    teamsTable->createLayout(json, false);
+
+    QVector<Team*> teams = teamsTable->getTeams();
+    int teamNo = 1;
+    foreach (Team *team, teams) {
+        int memberNo = 1;
+        foreach (Competitor *competitor, team->teamCompetitors()) {
+            competitor->setDisplayName(QString("T%1C%2").arg(teamNo).arg(memberNo));
+            memberNo++;
+        }
+        teamNo++;
+    }
+
+    for (int shotNo = 1; shotNo <= 4; shotNo++) {
+        teamNo = 1;
+        foreach (Team *team, teams) {
+            int shotValue = equalResults ? 99 : 100 - teamNo;
+            foreach (Competitor *competitor, team->teamCompetitors()) {
+                QString row = QString("_SHOT;17;18;13;60;28;10:02:56.30;3;1;0;10;%1;0;1;0.00396;-0.00583;900;0;0;655.35;387137447;64;559;0").arg(shotValue);
+                teamsTable->readSiusInfo(SiusShotData(competitor->id(), 0, shotNo, Lask(row)));
+            }
+            teamNo++;
+        }
+    }
+
+    return teamsTable;
+}
+
+QStringList competitorNames(const XlsTeamBlock &block)
+{
+    QStringList names;
+    foreach (const XlsShotRow &competitorRow, block.competitorRows) {
+        names << competitorRow.name;
+    }
+    return names;
+}
+
+}
+
+void TeamsTableTest::test_xlsDataForTeamsWithoutUniqueTeamNames()
+{
+    QScopedPointer<TeamsTable> teamsTable(createTeamsTableWithShots(3, false));
+
+    QVector<XlsTeamBlock> blocks = teamsTable->toXlsData(teamsTable->lastValidShotIndex() + 1);
+
+    QCOMPARE(blocks.size(), 3);
+    QCOMPARE(blocks.at(0).teamTotalRow.rank, "1.");
+    QCOMPARE(blocks.at(1).teamTotalRow.rank, "2.");
+    QCOMPARE(blocks.at(2).teamTotalRow.rank, "3.");
+    QCOMPARE(competitorNames(blocks.at(0)), QStringList({ "T1C1", "T1C2", "T1C3" }));
+    QCOMPARE(competitorNames(blocks.at(1)), QStringList({ "T2C1", "T2C2", "T2C3" }));
+    QCOMPARE(competitorNames(blocks.at(2)), QStringList({ "T3C1", "T3C2", "T3C3" }));
+    QCOMPARE(blocks.at(0).teamTotalRow.total, "118.8");
+    QCOMPARE(blocks.at(1).teamTotalRow.total, "117.6");
+    QCOMPARE(blocks.at(2).teamTotalRow.total, "116.4");
+}
+
+void TeamsTableTest::test_xlsDataForTeamsWithEqualResults()
+{
+    QScopedPointer<TeamsTable> teamsTable(createTeamsTableWithShots(2, true));
+
+    QVector<XlsTeamBlock> blocks = teamsTable->toXlsData(teamsTable->lastValidShotIndex() + 1);
+
+    QCOMPARE(blocks.size(), 3);
+    QCOMPARE(competitorNames(blocks.at(0)), QStringList({ "T1C1", "T1C2" }));
+    QCOMPARE(competitorNames(blocks.at(1)), QStringList({ "T2C1", "T2C2" }));
+    QCOMPARE(competitorNames(blocks.at(2)), QStringList({ "T3C1", "T3C2" }));
 }
 
 QTEST_MAIN(TeamsTableTest)

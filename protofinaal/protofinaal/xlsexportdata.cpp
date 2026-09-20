@@ -23,3 +23,13 @@ XlsExportData buildXlsExportData(const QVector<TeamsTable*> &tables)
 
     return data;
 }
+
+QVector<XlsShotRow> collectXlsRowsForBlock(const XlsTeamBlock &block)
+{
+    QVector<XlsShotRow> rows;
+    rows.append(block.teamTotalRow);
+    if (block.competitorRows.size() > 1) {
+        rows.append(block.competitorRows);
+    }
+    return rows;
+}

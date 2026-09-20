@@ -1,4 +1,5 @@
 #include "xlsexportservice.h"
+#include "xlsexportdata.h"
 #include "xlslib.h"
 
 bool XLSExportService::exportResults(
@@ -55,8 +56,7 @@ bool XLSExportService::exportResults(
     writeHeader(sheet, row, competitionName, timePlace, eventName, seriesSizes, titleFont, headerFont, underlineFont);
 
     for (const XlsTeamBlock &block : blocks) {
-        writeRow(sheet, row++, seriesSizes, block.teamTotalRow, textFont, boldFont);
-        for (const XlsShotRow &r : block.competitorRows) {
+        for (const XlsShotRow &r : collectXlsRowsForBlock(block)) {
             writeRow(sheet, row++, seriesSizes, r, textFont, boldFont);
         }
         row++; // Empty row between teams
