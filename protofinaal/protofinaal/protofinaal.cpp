@@ -65,13 +65,7 @@ Protofinaal::Protofinaal(QString fileName, QWidget* parent)
     if (verbose)
         QTextStream(stdout) << "currentFile = " << m_currentFile << Qt::endl;
 
-    m_logFile = new QFile(QFileInfo(m_currentFile).dir().absolutePath() + QString("/Protofinaal log %1.log").arg(QDate::currentDate().toString(Qt::ISODate)));
-
-    if (m_logFile->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) { // Log file
-        m_logOut.setDevice(m_logFile);
-    } else {
-        QMessageBox::critical(this, tr("Error!"), tr("Failed to write log file! Make sure you have write permission to the folder where the competition file is located."), QMessageBox::Ok);
-    }
+    openLogFileForCurrentFile();
 }
 
 Protofinaal::~Protofinaal()
@@ -214,11 +208,10 @@ void Protofinaal::connectToSiusData()
     if (m_siusDataConnections == nullptr) {
         m_siusDataConnections = new SiusDataConnections(m_siusLog, &m_logOut, &m_settings, this);
         connect(m_siusDataConnections, &SiusDataConnections::statusInfo, this, &Protofinaal::statusBarInfoChanged);
-        foreach (TeamsTable* teamsTable, m_teamsTables) {
-            connect(m_siusDataConnections, &SiusDataConnections::shotRead, teamsTable, &TeamsTable::readSiusInfo);
-        }
         connect(m_siusDataConnections, &SiusDataConnections::disconnectedFromSius, this, &Protofinaal::connectionToSiusLost);
     }
+
+    reconnectSiusDataToTeamsTables();
 
     if (m_siusLog->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) { // Saabunud võrguliikluse logi
         QTextStream valja(m_siusLog);
@@ -345,13 +338,10 @@ void Protofinaal::initialize()
             createLayoutFromConf(m_initialDialog->eventConf());
         }
 
-        m_logOut << "///////////////////////////////" << m_competitionName << ", " << QDateTime::currentDateTime().toString() << "///////////////////////////////\n";
-        statusBarInfoChanged(tr("Opened file: ") + m_currentFile);
+        onFileOpened();
         showSpecatorWindowOnSecondScreen();
     } else if (m_initialDialog->result() == QDialog::Rejected)
         QCoreApplication::quit();
-
-    setWindowTitle(programName + " - " + programVersion + " - " + m_currentFile + " - " + m_competitionName + " - " + m_eventName);
 }
 
 void Protofinaal::loadFile(QString fileName)
@@ -426,6 +416,7 @@ void Protofinaal::open()
     if (!fileName.isEmpty()) {
         m_currentFile = fileName;
         loadFile(fileName);
+        onFileOpened();
         writeSettings();
         updateSpectatorWindow();
     }
@@ -843,4 +834,45 @@ int Protofinaal::getGunTypeFromEventType() const
 
     // Default to Air Rifle
     return 0;
+}
+
+void Protofinaal::onFileOpened()
+{
+    openLogFileForCurrentFile();
+
+    m_logOut << "///////////////////////////////" << m_competitionName << ", " << QDateTime::currentDateTime().toString() << "///////////////////////////////\n";
+    statusBarInfoChanged(tr("Opened file: ") + m_currentFile);
+
+    reconnectSiusDataToTeamsTables();
+
+    setWindowTitle(programName + " - " + programVersion + " - " + m_currentFile + " - " + m_competitionName + " - " + m_eventName);
+}
+
+void Protofinaal::openLogFileForCurrentFile()
+{
+    m_logOut.setDevice(nullptr);
+    if (m_logFile != nullptr) {
+        m_logFile->close();
+        delete m_logFile;
+    }
+
+    m_logFile = new QFile(QFileInfo(m_currentFile).dir().absolutePath() + QString("/Protofinaal log %1.log").arg(QDate::currentDate().toString(Qt::ISODate)));
+
+    if (m_logFile->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) { // Log file
+        m_logOut.setDevice(m_logFile);
+    } else {
+        QMessageBox::critical(this, tr("Error!"), tr("Failed to write log file! Make sure you have write permission to the folder where the competition file is located."), QMessageBox::Ok);
+    }
+}
+
+void Protofinaal::reconnectSiusDataToTeamsTables()
+{
+    if (m_siusDataConnections == nullptr)
+        return;
+
+    // TeamsTables are recreated on every file load, so previously wired connections
+    // are gone; UniqueConnection guards against re-wiring the same table twice.
+    foreach (TeamsTable *teamsTable, m_teamsTables) {
+        connect(m_siusDataConnections, &SiusDataConnections::shotRead, teamsTable, &TeamsTable::readSiusInfo, Qt::UniqueConnection);
+    }
 }

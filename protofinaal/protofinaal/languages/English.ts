@@ -461,265 +461,265 @@ To create a new competition press the &quot;New&quot; button</source>
         <translation type="vanished">Open the spectator screen</translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="73"/>
+        <location filename="../protofinaal.cpp" line="864"/>
         <source>Failed to write log file! Make sure you have write permission to the folder where the competition file is located.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="99"/>
-        <location filename="../protofinaal.cpp" line="602"/>
+        <location filename="../protofinaal.cpp" line="93"/>
+        <location filename="../protofinaal.cpp" line="593"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="99"/>
+        <location filename="../protofinaal.cpp" line="93"/>
         <source>Language change will be applied after restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="123"/>
+        <location filename="../protofinaal.cpp" line="117"/>
         <source>Do you want to save changes and exit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="144"/>
+        <location filename="../protofinaal.cpp" line="138"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="145"/>
+        <location filename="../protofinaal.cpp" line="139"/>
         <source>&amp;Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="146"/>
-        <location filename="../protofinaal.cpp" line="198"/>
+        <location filename="../protofinaal.cpp" line="140"/>
+        <location filename="../protofinaal.cpp" line="192"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="148"/>
+        <location filename="../protofinaal.cpp" line="142"/>
         <source>&amp;Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="150"/>
-        <location filename="../protofinaal.cpp" line="425"/>
+        <location filename="../protofinaal.cpp" line="144"/>
+        <location filename="../protofinaal.cpp" line="415"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="153"/>
+        <location filename="../protofinaal.cpp" line="147"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="155"/>
+        <location filename="../protofinaal.cpp" line="149"/>
         <source>Save file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="158"/>
+        <location filename="../protofinaal.cpp" line="152"/>
         <source>Export xls...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="159"/>
+        <location filename="../protofinaal.cpp" line="153"/>
         <source>Export results to .xls file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="162"/>
+        <location filename="../protofinaal.cpp" line="156"/>
         <source>&amp;Import Sius startlist...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="164"/>
+        <location filename="../protofinaal.cpp" line="158"/>
         <source>Import Sius startlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="167"/>
+        <location filename="../protofinaal.cpp" line="161"/>
         <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="169"/>
+        <location filename="../protofinaal.cpp" line="163"/>
         <source>Exit from the program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="172"/>
+        <location filename="../protofinaal.cpp" line="166"/>
         <source>&amp;Spectator View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="173"/>
+        <location filename="../protofinaal.cpp" line="167"/>
         <source>Open the spectator view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="176"/>
+        <location filename="../protofinaal.cpp" line="170"/>
         <source>&amp;SiusData</source>
         <translation>Range Control/SiusData</translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="177"/>
+        <location filename="../protofinaal.cpp" line="171"/>
         <source>Connect to SiusData</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="181"/>
+        <location filename="../protofinaal.cpp" line="175"/>
         <source>Delete Shots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="182"/>
+        <location filename="../protofinaal.cpp" line="176"/>
         <source>Deletes all shots from selected competitors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="199"/>
+        <location filename="../protofinaal.cpp" line="193"/>
         <source>Change application language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="205"/>
+        <location filename="../protofinaal.cpp" line="199"/>
         <source>T&amp;esting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="212"/>
+        <location filename="../protofinaal.cpp" line="206"/>
         <source>/Protofinaal incoming log %1.log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="250"/>
+        <location filename="../protofinaal.cpp" line="243"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="264"/>
+        <location filename="../protofinaal.cpp" line="257"/>
         <source>File exported: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="73"/>
-        <location filename="../protofinaal.cpp" line="266"/>
-        <location filename="../protofinaal.cpp" line="307"/>
-        <location filename="../protofinaal.cpp" line="365"/>
-        <location filename="../protofinaal.cpp" line="411"/>
-        <location filename="../protofinaal.cpp" line="445"/>
-        <location filename="../protofinaal.cpp" line="455"/>
-        <location filename="../protofinaal.cpp" line="534"/>
-        <location filename="../protofinaal.cpp" line="593"/>
-        <location filename="../protofinaal.cpp" line="792"/>
+        <location filename="../protofinaal.cpp" line="259"/>
+        <location filename="../protofinaal.cpp" line="300"/>
+        <location filename="../protofinaal.cpp" line="355"/>
+        <location filename="../protofinaal.cpp" line="401"/>
+        <location filename="../protofinaal.cpp" line="436"/>
+        <location filename="../protofinaal.cpp" line="446"/>
+        <location filename="../protofinaal.cpp" line="525"/>
+        <location filename="../protofinaal.cpp" line="584"/>
+        <location filename="../protofinaal.cpp" line="783"/>
+        <location filename="../protofinaal.cpp" line="864"/>
         <source>Error!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="266"/>
+        <location filename="../protofinaal.cpp" line="259"/>
         <source>Failed to write file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="273"/>
+        <location filename="../protofinaal.cpp" line="266"/>
         <source>Open startlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="307"/>
+        <location filename="../protofinaal.cpp" line="300"/>
         <source>Failed to open the file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="349"/>
+        <location filename="../protofinaal.cpp" line="844"/>
         <source>Opened file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="365"/>
-        <location filename="../protofinaal.cpp" line="411"/>
+        <location filename="../protofinaal.cpp" line="355"/>
+        <location filename="../protofinaal.cpp" line="401"/>
         <source>Finals file is broken!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="417"/>
+        <location filename="../protofinaal.cpp" line="407"/>
         <source>Do you want to save changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="425"/>
+        <location filename="../protofinaal.cpp" line="415"/>
         <source>Protofinaal file (*.fin)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="445"/>
+        <location filename="../protofinaal.cpp" line="436"/>
         <source>File version is newer than this version of the program. Errors may occur when opening the file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="455"/>
+        <location filename="../protofinaal.cpp" line="446"/>
         <source>Cannot open the file!
 
 Location: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="534"/>
+        <location filename="../protofinaal.cpp" line="525"/>
         <source>Event file is broken!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="593"/>
+        <location filename="../protofinaal.cpp" line="584"/>
         <source>Second screen not found. For the program to work properly, two screens are required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="602"/>
+        <location filename="../protofinaal.cpp" line="593"/>
         <source>Spectator view shown on the second screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="694"/>
+        <location filename="../protofinaal.cpp" line="685"/>
         <source>Shot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="698"/>
-        <location filename="../protofinaal.cpp" line="700"/>
+        <location filename="../protofinaal.cpp" line="689"/>
+        <location filename="../protofinaal.cpp" line="691"/>
         <source>Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="698"/>
-        <location filename="../protofinaal.cpp" line="700"/>
+        <location filename="../protofinaal.cpp" line="689"/>
+        <location filename="../protofinaal.cpp" line="691"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="698"/>
+        <location filename="../protofinaal.cpp" line="689"/>
         <source>Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="698"/>
-        <location filename="../protofinaal.cpp" line="700"/>
+        <location filename="../protofinaal.cpp" line="689"/>
+        <location filename="../protofinaal.cpp" line="691"/>
         <source>Diff</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="700"/>
+        <location filename="../protofinaal.cpp" line="691"/>
         <source>Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="789"/>
+        <location filename="../protofinaal.cpp" line="780"/>
         <source>File saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="792"/>
+        <location filename="../protofinaal.cpp" line="783"/>
         <source>Cannot write to file!
 Make sure you have write permission to that folder.</source>
         <translation type="unfinished"></translation>
@@ -741,7 +741,7 @@ Make sure you have write permission to that folder.</source>
         <translation type="vanished">/Protofinaal in log %1.log</translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="251"/>
+        <location filename="../protofinaal.cpp" line="244"/>
         <source>Excel workbook file (*.xls)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -750,7 +750,7 @@ Make sure you have write permission to that folder.</source>
         <translation type="vanished">Open a Start List</translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="273"/>
+        <location filename="../protofinaal.cpp" line="266"/>
         <source>Comma separated file (*.csv)</source>
         <translation>Comma separated file (*.csv)</translation>
     </message>

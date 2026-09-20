@@ -89,6 +89,9 @@ private:
     void createLayoutFromConf(QJsonObject conf);
     int getGunTypeFromEventType() const;
     void initializeSpectatorTargets();
+    void onFileOpened();
+    void openLogFileForCurrentFile();
+    void reconnectSiusDataToTeamsTables();
     void setupTranslator();
     void writeFinalsFile(QString fileName);
     void writeSettings();
