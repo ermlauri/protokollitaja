@@ -168,7 +168,7 @@ void Lane::setStartListCompetitorRow(QString competitorRow)
 {
     // targetNo;id;firstName;lastName;club;eventType;decimals;numberOfShots // TODO Lauri: Update to use new eventType
     QStringList parts = competitorRow.split(";");
-    if(parts.count() >= 6){    // Make sure the row is not too short
+    if (parts.count() >= 8) { // Make sure the row is not too short
         m_selected.setChecked(true);
         m_idEdit.setText(parts.at(1));
         m_firstNameEdit.setText(parts.at(2));

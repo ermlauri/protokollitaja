@@ -273,7 +273,10 @@ void Protofinaal::importSiusStartList()
         QStringList rows;
         while (!in.atEnd()) { // Read the whole file in
             QString newRow = in.readLine();
-            int newTarget = newRow.split(';').at(10).toInt();
+            QStringList rowParts = newRow.split(';');
+            if (rowParts.count() < 15)
+                continue; // Row too short, so something is wrong
+            int newTarget = rowParts.at(10).toInt();
             bool wasAdded = false;
             if (rows.size() > 0) {
                 for (int i = 0; i < rows.size(); i++) {
@@ -351,8 +354,10 @@ void Protofinaal::loadFile(QString fileName)
     clear();
     QJsonObject jsonObj = readFinalsFile(fileName);
 
-    if (!(jsonObj.contains("competitionName") && jsonObj["competitionName"].isString()) || !(jsonObj.contains("eventName") && jsonObj["eventName"].isString()) || !(jsonObj.contains("eventType") && jsonObj["eventType"].isString()) || !(jsonObj.contains("timePlace") && jsonObj["timePlace"].isString()) || !(jsonObj.contains("fileVersion") && jsonObj["fileVersion"].isDouble()))
+    if (!(jsonObj.contains("competitionName") && jsonObj["competitionName"].isString()) || !(jsonObj.contains("eventName") && jsonObj["eventName"].isString()) || !(jsonObj.contains("eventType") && jsonObj["eventType"].isString()) || !(jsonObj.contains("timePlace") && jsonObj["timePlace"].isString()) || !(jsonObj.contains("fileVersion") && jsonObj["fileVersion"].isDouble())) {
         QMessageBox::critical(this, tr("Error!"), tr("Finals file is broken!"));
+        return;
+    }
 
     m_eventType = jsonObj["eventType"].toString();
 
@@ -397,8 +402,10 @@ void Protofinaal::loadFile(QString fileName)
         m_modifiedAfterSave = false;
 
         initializeSpectatorTargets();
-    } else
+    } else {
         QMessageBox::critical(this, tr("Error!"), tr("Finals file is broken!"));
+        return;
+    }
 }
 
 void Protofinaal::open()
@@ -521,8 +528,10 @@ void Protofinaal::save()
 
 void Protofinaal::createLayoutFromConf(QJsonObject conf)
 {
-    if (!(conf.contains("event") && conf["event"].isString()) || !(conf.contains("relaysTogether") && conf["relaysTogether"].isDouble()) || !(conf.contains("teams") && conf["teams"].isDouble()) || !(conf.contains("membersInTeam") && conf["membersInTeam"].isDouble()) || !(conf.contains("shots") && conf["shots"].isArray()) || !(conf.contains("scoringWithPoints") && conf["scoringWithPoints"].isBool()))
+    if (!(conf.contains("event") && conf["event"].isString()) || !(conf.contains("relaysTogether") && conf["relaysTogether"].isDouble()) || !(conf.contains("teams") && conf["teams"].isDouble()) || !(conf.contains("membersInTeam") && conf["membersInTeam"].isDouble()) || !(conf.contains("shots") && conf["shots"].isArray()) || !(conf.contains("scoringWithPoints") && conf["scoringWithPoints"].isBool())) {
         QMessageBox::critical(this, tr("Error!"), tr("Event file is broken!"));
+        return;
+    }
 
     m_scoringWithPoints = false;
     if (conf.contains("scoringWithPoints") && conf["scoringWithPoints"].isBool()) {
@@ -653,6 +662,9 @@ void Protofinaal::updateSpectatorWindow()
         QTextStream(stdout) << "Protofinaal::updateSpectatorWindow()" << Qt::endl;
 
     m_spectatorWindow.clearResults();
+
+    if (m_teamsTables.isEmpty())
+        return;
 
     // Update shots on existing targets
     for (int i = 0; i < m_teamsTables.size(); i++) {

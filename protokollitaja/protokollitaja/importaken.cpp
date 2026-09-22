@@ -149,8 +149,9 @@ void ImportAken::fromFile()
                         for(int i = 0; i < seeriateArv; i++){
                                 if(vSummadeSamm != 0)
                                         if(i % vSummadeSamm == 0 && i != 0) lisaIndeks++;
-                                leht->laskurid[leht->laskurid.count() - 1]->seeriad[i]->setText(andmed[arv + 4 + i +
-                                                                                                       lisaIndeks].trimmed());
+                                int andmedIndeks = arv + 4 + i + lisaIndeks;
+                                if(andmedIndeks >= andmed.count()) break; // Row is shorter than the step detected from a previous row
+                                leht->laskurid[leht->laskurid.count() - 1]->seeriad[i]->setText(andmed[andmedIndeks].trimmed());
                         }
                         //QMessageBox::information(this, "Protokollitaja", "Kolmandas kohas", QMessageBox::Ok);
                         leht->laskurid[leht->laskurid.count() - 1]->setSumma(andmed[andmed.count() - 1 - arv2].trimmed());
@@ -284,8 +285,9 @@ void ImportAken::fromClipboard()
                 for(int i = 0; i < seeriateArv; i++){
                         if(vSummadeSamm != 0)
                                 if(i % vSummadeSamm == 0 && i != 0) lisaIndeks++;
-                        leht->laskurid[leht->laskurid.count() - 1]->seeriad[i]->setText(andmed[arv + 4 + i +
-                                                                                               lisaIndeks].trimmed());
+                        int andmedIndeks = arv + 4 + i + lisaIndeks;
+                        if(andmedIndeks >= andmed.count()) break; // Row is shorter than the step detected from a previous row
+                        leht->laskurid[leht->laskurid.count() - 1]->seeriad[i]->setText(andmed[andmedIndeks].trimmed());
                 }
                 //QMessageBox::information(this, "Protokollitaja", "Kolmandas kohas", QMessageBox::Ok);
                 leht->laskurid[leht->laskurid.count() - 1]->setSumma(andmed[andmed.count() - 1 - arv2].trimmed());

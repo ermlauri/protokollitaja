@@ -28,6 +28,8 @@ private:
     QString m_buffer;
 //    QString lastRecvdLine;
     QTcpSocket *socket;
+    quint16 blockSize = 0;
+    quint16 protocolVersion = 0;
 
 private slots:
     void readData();

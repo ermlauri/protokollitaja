@@ -58,6 +58,11 @@ bool UpdateChecker::isCurrentVersionOld(QString currentVersion, QString newVersi
     QStringList versionNo = currentBase.split(".");
     QStringList newVersionNo = newVersion.split(".");
 
+    if (versionNo.count() < 3 || newVersionNo.count() < 3) {
+        QTextStream(stdout) << "#ERROR: Unable to parse version numbers for comparison: " << currentVersion << ", " << newVersion << Qt::endl;
+        return false;
+    }
+
     // Compare base versions starting from major numbers
     if(versionNo[0].toInt() < newVersionNo[0].toInt()
         || (versionNo[1].toInt() < newVersionNo[1].toInt() && versionNo[0].toInt() == newVersionNo[0].toInt())
@@ -87,6 +92,12 @@ void UpdateChecker::readWebVersionInfo()
     } else {
         QStringList versionsList = info.left(info.indexOf("\n")).split(";");    // Version no, together with list of files to be updated
         QTextStream(stdout) << "Latest available version from web: " << versionsList.join(";") << Qt::endl;
+        if (versionsList.count() < 2) {
+            QTextStream(stdout) << "#ERROR: Unable to parse version info from web!" << Qt::endl;
+            *m_log << "#ERROR: Unable to parse version info from web!" << Qt::endl;
+            emit versionInfoResponse(false, "#ERROR: Unable to find version info! Program needs to be updated manually!");
+            return;
+        }
         bool updateExists = isCurrentVersionOld(m_currentVersion, versionsList[1]);
         emit versionInfoResponse(updateExists, versionsList[1]);
     }

@@ -43,7 +43,7 @@ Kontrollige, kas Protokollitaja ja Range Control&apos;i versioonid ühtivad!</so
 Check that Protokollitaja and Range Control versions are the same!</translation>
     </message>
     <message>
-        <location filename="../dataconnection.cpp" line="47"/>
+        <location filename="../dataconnection.cpp" line="46"/>
         <source>Unknown incoming connection version: %1
 Check whether Protokollitaja and Range Control versions match!</source>
         <translation type="unfinished"></translation>

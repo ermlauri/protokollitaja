@@ -2362,11 +2362,12 @@ void Protokollitaja::readFinalsFile(QString fileName)
                                     if (seriesObj.contains("Sum") && seriesObj["Sum"].isString()) {
                                         QString finalsResult = seriesObj["Sum"].toString();
 
-                                        if (name.at(1) == '.') {
+                                        if (name.length() > 1 && name.at(1) == '.') {
                                             name.remove(0, 2);
                                             name = name.trimmed();
-                                        } else if(name.at(name.length() - 1) == '.') {
-                                            name.remove(name.length() - 3, 3);
+                                        } else if (!name.isEmpty() && name.at(name.length() - 1) == '.') {
+                                            int charsToRemove = qMin(name.length(), 3);
+                                            name.remove(name.length() - charsToRemove, charsToRemove);
                                             name = name.trimmed();
                                         }
 #ifdef QT_DEBUG
@@ -3764,6 +3765,10 @@ void Protokollitaja::readShotInfo(QString data, int socketIndex)
 
     data.remove(0, 7);
     QStringList dataList = data.split(";", Qt::KeepEmptyParts);
+    if (dataList.count() < 7) { // Target numbers, name fields and series info are always expected
+        saadaVorku("Viga:" + tr("Received data is malformed or too short!\n\nResults were not updated!"), socketIndex);
+        return;
+    }
     QString targetNumbersStart = dataList.at(0).left(dataList.at(0).indexOf('-')).trimmed();
     QString targetNumbersEnd = dataList.at(0).mid(dataList.at(0).indexOf('-') + 1, dataList.at(0).length()).trimmed();
     dataList.takeFirst(); //Target numbers have been taken already
@@ -3814,11 +3819,20 @@ void Protokollitaja::readShotInfo(QString data, int socketIndex)
         qDebug() << "series = " << series << ", seriesNo = " << seriesNo << "\n";
 #endif
 
+    if(seriesNo < 0 || seriesNo >= thisCompetitor->seeriad.size() || seriesNo >= thisCompetitor->lasud.size()){   //Received series number does not exist for this competitor
+        saadaVorku("Viga:" + tr("Received series number is invalid!\n\nResults were not updated!"), socketIndex);
+        return;
+    }
+
     if(!thisCompetitor->seeriad[seriesNo]->text().isEmpty() && thisCompetitor->seeriad[seriesNo]->text() != series){   //Add error message and ask what to do?
         saadaVorku("Viga:" + tr("This series already has a result!\n\nResults were not updated. If you want to overwrite the existing results, delete the existing serie first!"), socketIndex);
         logiValja << "#lehelugemisel seeria muutus: " << thisCompetitor->id << " " << thisCompetitor->eesNimi->text() << " "
                   << thisCompetitor->perekNimi->text() << ", vana: " << thisCompetitor->seeriad[seriesNo]->text() << " uus: " << series << "\n";
     }else if(!series.isEmpty()){    //Only new results will be sent and read
+        if(dataList.count() < numberOfShots * 3 || thisCompetitor->lasud[seriesNo].size() < numberOfShots){   //Not enough shot data received for this series
+            saadaVorku("Viga:" + tr("Received data is malformed or too short!\n\nResults were not updated!"), socketIndex);
+            return;
+        }
         thisCompetitor->seeriad[seriesNo]->setText(series);
         for(int j = 0; j < numberOfShots; j++){
             thisCompetitor->lasud[seriesNo][j]->setLask(dataList.takeFirst());
@@ -4342,10 +4356,10 @@ void Protokollitaja::uploadResults()
         QTextStream(stdout) << "Unable to open file" << Qt::endl;
 #endif
 
-    if(dataUploader == nullptr)
+    if(dataUploader == nullptr) {
         dataUploader = new DataUploader(verbose, &logiValja, this);
-
-    connect(dataUploader, &DataUploader::uploadFinished, this, &Protokollitaja::dataUploaderFinished);
+        connect(dataUploader, &DataUploader::uploadFinished, this, &Protokollitaja::dataUploaderFinished);
+    }
 
     dataUploader->uploadResults(url, m_restHeaderData, webCompetitionId, jsonDoc);
 

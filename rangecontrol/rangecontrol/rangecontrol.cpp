@@ -89,7 +89,7 @@ void RangeControl::allShotsDataReceived(int target, QString shotsData)
 {   // Used only by old Scoring
     QStringList msgParts = shotsData.split('\n');
     QStringList shotsList;
-    for (int i = 2; i < (msgParts.count() - 1); i += 3) {  // First 2 parts and last are not related to shots
+    for (int i = 2; i < (msgParts.count() - 2); i += 3) {  // First 2 parts and last are not related to shots
         shotsList.append(QString("%1;%2;%3").arg(msgParts.at(i), msgParts.at(i + 1), msgParts.at(i + 2)));
     }
 

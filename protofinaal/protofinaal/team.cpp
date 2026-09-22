@@ -101,6 +101,8 @@ int Team::index()
 
 bool Team::isActive() const
 {
+    if (m_teamCompetitors.isEmpty())
+        return false;
     return m_teamCompetitors.at(0)->isActive();
 }
 
@@ -253,6 +255,8 @@ QVector<Competitor *> Team::teamCompetitors()
 
 QString Team::teamName() const
 {
+    if (m_teamCompetitors.isEmpty())
+        return "";
     QString name = m_teamCompetitors.first()->name();
     if (m_teamCompetitors.size() == 2)
         name.append("/" + m_teamCompetitors.at(1)->name());

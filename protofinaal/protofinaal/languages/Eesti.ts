@@ -202,13 +202,13 @@ To create a new competition press the &quot;New&quot; button</source>
 <context>
     <name>Protofinaal</name>
     <message>
-        <location filename="../protofinaal.cpp" line="864"/>
+        <location filename="../protofinaal.cpp" line="876"/>
         <source>Failed to write log file! Make sure you have write permission to the folder where the competition file is located.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../protofinaal.cpp" line="93"/>
-        <location filename="../protofinaal.cpp" line="593"/>
+        <location filename="../protofinaal.cpp" line="602"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
@@ -245,7 +245,7 @@ To create a new competition press the &quot;New&quot; button</source>
     </message>
     <message>
         <location filename="../protofinaal.cpp" line="144"/>
-        <location filename="../protofinaal.cpp" line="415"/>
+        <location filename="../protofinaal.cpp" line="422"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -346,15 +346,15 @@ To create a new competition press the &quot;New&quot; button</source>
     </message>
     <message>
         <location filename="../protofinaal.cpp" line="259"/>
-        <location filename="../protofinaal.cpp" line="300"/>
-        <location filename="../protofinaal.cpp" line="355"/>
-        <location filename="../protofinaal.cpp" line="401"/>
-        <location filename="../protofinaal.cpp" line="436"/>
-        <location filename="../protofinaal.cpp" line="446"/>
-        <location filename="../protofinaal.cpp" line="525"/>
-        <location filename="../protofinaal.cpp" line="584"/>
-        <location filename="../protofinaal.cpp" line="783"/>
-        <location filename="../protofinaal.cpp" line="864"/>
+        <location filename="../protofinaal.cpp" line="303"/>
+        <location filename="../protofinaal.cpp" line="358"/>
+        <location filename="../protofinaal.cpp" line="406"/>
+        <location filename="../protofinaal.cpp" line="443"/>
+        <location filename="../protofinaal.cpp" line="453"/>
+        <location filename="../protofinaal.cpp" line="532"/>
+        <location filename="../protofinaal.cpp" line="593"/>
+        <location filename="../protofinaal.cpp" line="795"/>
+        <location filename="../protofinaal.cpp" line="876"/>
         <source>Error!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -369,98 +369,98 @@ To create a new competition press the &quot;New&quot; button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="300"/>
+        <location filename="../protofinaal.cpp" line="303"/>
         <source>Failed to open the file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="844"/>
+        <location filename="../protofinaal.cpp" line="856"/>
         <source>Opened file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="355"/>
-        <location filename="../protofinaal.cpp" line="401"/>
+        <location filename="../protofinaal.cpp" line="358"/>
+        <location filename="../protofinaal.cpp" line="406"/>
         <source>Finals file is broken!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="407"/>
+        <location filename="../protofinaal.cpp" line="414"/>
         <source>Do you want to save changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="415"/>
+        <location filename="../protofinaal.cpp" line="422"/>
         <source>Protofinaal file (*.fin)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="436"/>
+        <location filename="../protofinaal.cpp" line="443"/>
         <source>File version is newer than this version of the program. Errors may occur when opening the file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="446"/>
+        <location filename="../protofinaal.cpp" line="453"/>
         <source>Cannot open the file!
 
 Location: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="525"/>
+        <location filename="../protofinaal.cpp" line="532"/>
         <source>Event file is broken!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="584"/>
+        <location filename="../protofinaal.cpp" line="593"/>
         <source>Second screen not found. For the program to work properly, two screens are required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="593"/>
+        <location filename="../protofinaal.cpp" line="602"/>
         <source>Spectator view shown on the second screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="685"/>
+        <location filename="../protofinaal.cpp" line="697"/>
         <source>Shot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="689"/>
-        <location filename="../protofinaal.cpp" line="691"/>
+        <location filename="../protofinaal.cpp" line="701"/>
+        <location filename="../protofinaal.cpp" line="703"/>
         <source>Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="689"/>
-        <location filename="../protofinaal.cpp" line="691"/>
+        <location filename="../protofinaal.cpp" line="701"/>
+        <location filename="../protofinaal.cpp" line="703"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="689"/>
+        <location filename="../protofinaal.cpp" line="701"/>
         <source>Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="689"/>
-        <location filename="../protofinaal.cpp" line="691"/>
+        <location filename="../protofinaal.cpp" line="701"/>
+        <location filename="../protofinaal.cpp" line="703"/>
         <source>Diff</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="691"/>
+        <location filename="../protofinaal.cpp" line="703"/>
         <source>Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="780"/>
+        <location filename="../protofinaal.cpp" line="792"/>
         <source>File saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../protofinaal.cpp" line="783"/>
+        <location filename="../protofinaal.cpp" line="795"/>
         <source>Cannot write to file!
 Make sure you have write permission to that folder.</source>
         <translation type="unfinished"></translation>

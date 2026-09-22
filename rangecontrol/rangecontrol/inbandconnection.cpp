@@ -2,9 +2,10 @@
 
 #define CR QChar(0x0d)
 
-InbandConnection::InbandConnection(QTextStream *log, QTcpSocket *parent): QObject(parent)
+InbandConnection::InbandConnection(QTextStream *log, QTcpSocket *parent): QObject()
 {
     socket = parent;
+    socket->setParent(this); // Own the socket so deleteLater() on this also frees it, instead of leaking it
     m_log = log;
     connect(socket, &QTcpSocket::readyRead, this, &InbandConnection::readIncomingData);
     connect(socket, &QTcpSocket::disconnected, this, [this]() { emit disconnected(); });
@@ -48,7 +49,7 @@ void InbandConnection::readIncomingData()
         int target = msgParts.at(0).toInt();
         QTextStream(stdout) << "InbandConnection::readIncomingData, msgParts = " << msgParts.join(",") << Qt::endl;
 
-        if (msgParts.length() >= 3) {
+        if (msgParts.length() > 3) {
             if (msgParts.at(1) == "shot") {
                 QTextStream(stdout) << "Received shot: " << msgParts.join(",") << Qt::endl;
                 // _SHOT;14;target;Id;60;6;time;3;1;39;value;0;0;shotNo;X;Y;900;0;0;655.35;2154896560;64;560;0
@@ -83,7 +84,7 @@ void InbandConnection::readIncomingData()
         int target = msgParts.at(0).toInt();
         QTextStream(stdout) << "InbandConnection::readIncomingData(new), msgParts = " << msgParts.join(",") << Qt::endl;
 
-        if (msgParts.length() >= 3) {
+        if (msgParts.length() > 3) {
             if (msgParts.at(1) == "shot") {
                 QTextStream(stdout) << "Received shot(new): " << msgParts.join(",") << Qt::endl;
                 // _SHOT;14;target;Id;60;6;time;3;1;39;value;0;0;shotNo;X;Y;900;0;0;655.35;2154896560;64;560;0

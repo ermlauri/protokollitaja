@@ -3,9 +3,10 @@
 #define CR 0x0d
 #define LF 0x0a
 
-DataConnection::DataConnection(QTcpSocket *parent) : QObject(parent)
+DataConnection::DataConnection(QTcpSocket *parent) : QObject()
 {
     socket = parent;
+    socket->setParent(this); // Own the socket so deleteLater() on this also frees it, instead of leaking it
     connect(socket, &QTcpSocket::disconnected, this, &DataConnection::wasDisconnected);
     connect(socket, &QTcpSocket::readyRead, this, &DataConnection::readData);
 }
@@ -17,8 +18,6 @@ void DataConnection::abort()
 
 void DataConnection::readData()
 {
-    static quint16 blockSize = 0;
-    static quint16 protocolVersion = 0;
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_6_5);
 
