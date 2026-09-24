@@ -355,8 +355,10 @@ bool Competitor::readSiusShot(SiusShotData shotData)
                 result = true;  // Shot already existing, ignore, but return true
             } else
                 result = false;
-        } else {
-            // TODO draw sighting shots on spectator's screen
+        } else if (!shotData.shot.isCompetitionShot()) {
+            // Sighting shots aren't stored as results, but are still shown on the spectator's
+            // screen via the shotReadForTarget signal emitted regardless of this return value
+            result = true;
         }
     }
     return result;

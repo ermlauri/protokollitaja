@@ -26,6 +26,7 @@ private slots:
     void test_lastResultAndSumWithShots();
     void test_readSiusShotAdditionalShot();
     void test_readSiusShotIgnoreWrongId();
+    void test_readSiusShotIgnoresSightingShot();
     void test_readSiusShotReadCompetitionShotsWithoutSighters();
     void test_readSiusShotRepeatedShotDataInFirstStage();
     void test_readSiusShotWithOffset();
@@ -409,6 +410,22 @@ void CompetitorTest::test_readSiusShotIgnoreWrongId()
 
     SiusShotData shot1(17, 0, 2, Lask("_SHOT;16;17;15;60;17;09:57:56.05;3;1;0;8;88;0;2;0.01295;0.01074;900;0;0;655.35;387107423;64;559;0"));
     QCOMPARE(competitor.readSiusShot(shot1), false);
+}
+
+void CompetitorTest::test_readSiusShotIgnoresSightingShot()
+{
+    QJsonArray conf = {3, 3, 10};
+    Competitor competitor(13, conf, false);
+
+    SiusShotData sighter(13, 0, 1, Lask(105, 354, -983, true, QTime::currentTime(), false));
+    QCOMPARE(competitor.readSiusShot(sighter), true);
+    QCOMPARE(competitor.shotAt(0).has_value(), false);
+    QCOMPARE(competitor.lastValidShotIndex(), -1);
+
+    SiusShotData shot1(13, 0, 1, Lask("_SHOT;17;18;13;60;28;10:02:56.30;3;1;0;10;101;0;1;0.00396;-0.00583;900;0;0;655.35;387137447;64;559;0"));
+    QCOMPARE(competitor.readSiusShot(shot1), true);
+    QCOMPARE(competitor.shotAt(0).has_value(), true);
+    QCOMPARE(competitor.shotAt(0)->getSLask(), "10,1");
 }
 
 void CompetitorTest::test_readSiusShotReadCompetitionShotsWithoutSighters()

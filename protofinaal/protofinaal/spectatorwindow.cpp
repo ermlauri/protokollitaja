@@ -77,6 +77,7 @@ void SpectatorWindow::addTarget(QString name, QString targetNo, int gunType)
     Target *target = new Target(gunType, name, targetNo, this);
     target->setZoomEnabled(true);
     target->init(gunType);
+    target->setSighterMarkVisible(true); // Competitors sight in before competition shots start
 
     m_targets[targetNo] = target;
 
@@ -232,7 +233,18 @@ void SpectatorWindow::updateTarget(QString targetNo, Lask shot)
         return;
     }
 
-    m_targets[targetNo]->drawAShot(shot);
+    Target *target = m_targets[targetNo];
+
+    if (shot.isCompetitionShot()) {
+        if (target->sighterMarkVisible()) {
+            // First competition shot after sighting: clear the sighting shots off the target
+            target->reset();
+            target->setSighterMarkVisible(false);
+        }
+    } else
+        target->setSighterMarkVisible(true);
+
+    target->drawAShot(shot);
 
     if (verbose)
         QTextStream(stdout) << "SpectatorWindow::updateTarget(), shot drawn" << Qt::endl;
