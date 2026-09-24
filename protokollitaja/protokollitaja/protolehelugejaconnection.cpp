@@ -2,13 +2,14 @@
 
 extern bool verbose;
 
-ProtolehelugejaConnection::ProtolehelugejaConnection(QTcpSocket *parent) : QObject(parent)
+ProtolehelugejaConnection::ProtolehelugejaConnection(QTcpSocket *parent) : QObject()
 {
     askedTargetNumber = 0;
     authorized = false;
     blockSize = 0;
     passwd = 0;
     socket = parent;
+    socket->setParent(this); // Own the socket so deleteLater() on this also frees it, instead of leaking it
     connect(socket, &QTcpSocket::readyRead, this, &ProtolehelugejaConnection::readData);
     connect(socket, &QTcpSocket::disconnected, this, &ProtolehelugejaConnection::wasDisconnected);
 

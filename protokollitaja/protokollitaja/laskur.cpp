@@ -1850,4 +1850,9 @@ Laskur::~Laskur()
         lisaAken->deleteLater();
         lisaAken = nullptr;
     }
+    for(int i = 0; i < lasud.length(); i++){
+        for(Lask *shot : lasud.at(i))
+            delete shot;
+    }
+    lasud.clear();
 }

@@ -2500,35 +2500,35 @@ Number of series is too big.</source>
 <context>
     <name>ProtolehelugejaConnection</name>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="17"/>
+        <location filename="../protolehelugejaconnection.cpp" line="18"/>
         <source>New incoming connection.
 
 Pin: %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="95"/>
+        <location filename="../protolehelugejaconnection.cpp" line="96"/>
         <source>Someone tried to connect with incorrect pin! Connection not established!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="95"/>
+        <location filename="../protolehelugejaconnection.cpp" line="96"/>
         <source>Info</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="102"/>
+        <location filename="../protolehelugejaconnection.cpp" line="103"/>
         <source>Connection established</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="108"/>
+        <location filename="../protolehelugejaconnection.cpp" line="109"/>
         <source>Error:Protokollitaja ja Protolehelugeja versions are different!
 Protokollitaja is newer, therefore need to update Protolehelugeja or both.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="113"/>
+        <location filename="../protolehelugejaconnection.cpp" line="114"/>
         <source>Error:Protokollitaja ja Protolehelugeja versions are different!
 Protolehelugeja is newer, therefore need to update Protokollitaja or both</source>
         <translation></translation>

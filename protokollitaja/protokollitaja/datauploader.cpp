@@ -34,6 +34,7 @@ void DataUploader::restClientFinished(QNetworkReply *reply)
 
         emit uploadFinished(true, answer);
     }
+    reply->deleteLater();
 }
 
 void DataUploader::uploadResults(const QUrl url, const QString headerData, const QString webCompetitionId, const QJsonDocument data)
@@ -54,7 +55,7 @@ void DataUploader::uploadResults(const QUrl url, const QString headerData, const
     if(m_restClient == nullptr)
         m_restClient = new QNetworkAccessManager(this);
 
-    connect(m_restClient, &QNetworkAccessManager::finished, this, &DataUploader::restClientFinished);
+    connect(m_restClient, &QNetworkAccessManager::finished, this, &DataUploader::restClientFinished, Qt::UniqueConnection);
 
     if(webCompetitionId.isEmpty()) {
         m_restClient->post(request, data.toJson());

@@ -41,7 +41,7 @@ void UpdateChecker::getLatestVersionInfo(QString user, QString repo)
     if(m_restClient == nullptr)
         m_restClient = new QNetworkAccessManager(this);
 
-    connect(m_restClient, &QNetworkAccessManager::finished, this, &UpdateChecker::restClientFinished);
+    connect(m_restClient, &QNetworkAccessManager::finished, this, &UpdateChecker::restClientFinished, Qt::UniqueConnection);
 
     m_restClient->get(request);
 }
@@ -116,4 +116,5 @@ void UpdateChecker::restClientFinished(QNetworkReply *reply)
         bool updateExists = isCurrentVersionOld(m_currentVersion, json[0]["name"].toString());
         emit versionInfoResponse(updateExists, json[0]["name"].toString());
     }
+    reply->deleteLater();
 }

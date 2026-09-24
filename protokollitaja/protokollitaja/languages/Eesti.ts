@@ -2568,7 +2568,7 @@ Seeriate arv liiga suur.</translation>
 <context>
     <name>ProtolehelugejaConnection</name>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="17"/>
+        <location filename="../protolehelugejaconnection.cpp" line="18"/>
         <source>New incoming connection.
 
 Pin: %1</source>
@@ -2577,29 +2577,29 @@ Pin: %1</source>
 Parool: %1</translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="95"/>
+        <location filename="../protolehelugejaconnection.cpp" line="96"/>
         <source>Someone tried to connect with incorrect pin! Connection not established!</source>
         <translation>Keegi proovis ühenduda vale parooliga! Ühendust ei loodud!</translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="95"/>
+        <location filename="../protolehelugejaconnection.cpp" line="96"/>
         <source>Info</source>
         <translation>Teade</translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="102"/>
+        <location filename="../protolehelugejaconnection.cpp" line="103"/>
         <source>Connection established</source>
         <translation>Ühendus loodud</translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="108"/>
+        <location filename="../protolehelugejaconnection.cpp" line="109"/>
         <source>Error:Protokollitaja ja Protolehelugeja versions are different!
 Protokollitaja is newer, therefore need to update Protolehelugeja or both.</source>
         <translation>Viga:Protokollitaja ja Protolehelugeja versioonid ei ühti!
 Protokollitaja on uuem, seega on vaja uuendada Protolehelugejat või mõlemaid.</translation>
     </message>
     <message>
-        <location filename="../protolehelugejaconnection.cpp" line="113"/>
+        <location filename="../protolehelugejaconnection.cpp" line="114"/>
         <source>Error:Protokollitaja ja Protolehelugeja versions are different!
 Protolehelugeja is newer, therefore need to update Protokollitaja or both</source>
         <translation>Viga:Protokollitaja ja Protolehelugeja versioonid ei ühti!
